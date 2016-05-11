@@ -1,0 +1,2 @@
+# anguljarjsDirectiveImitateBootstrapUI
+angular指令实现bootstrap插件效果
