@@ -1,0 +1,53 @@
+body{
+    width: 100%;
+}
+
+.clearfix{
+    *zoom:1;
+}
+.clearfix:after{
+    content: "\300B";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.demo {
+    width: 800px;
+    padding-top:1px;
+    margin:10px auto;
+
+}
+
+.demo >div{
+    background: #F7F7F7;
+}
+
+.demo-alert{
+    padding:15px
+}
+
+.demo-alert h2{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.demo-alert h3{
+    font-size: 20px;
+    font-weight: 600;
+}
+.demo-popover{
+    position: relative;
+    padding:20px;
+    margin-top:50px;
+    margin-bottom:100px;
+}
+.demo-popover .btn{
+    float:left;
+    margin-right:15px;
+}
+
+.demo-popover .demo1,.demo-popover .demo2{
+    padding:20px;
+}

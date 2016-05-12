@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/demo.css" type="text/css" rel="stylesheet" />
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript" src="js/xiao_alert.js"></script>
+    <script type="text/javascript" src="js/xiao_popover.js"></script>
+</head>
+<body ng-app="demoApp">
+    <div class="demo" >
+        <div class="demo-alert" >
+            <h2>xiaoAlert</h2>
+            <div>
+                <h3>1.simple</h3>
+                <div class="alert alert-block alert-error fade in" xiao-alert>
+                    <button type="button" class="close" miss-data="alert">×</button>
+                    <h4 class="alert-heading">Oh snap! You got an error!</h4>
+                    <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+                </div>
+            </div>
+            <div ng-controller="alertDemoController">
+                <h3>2.complex</h3>
+                <div class="alert alert-block alert-error fade in" xiao-alert="close_alert" xiao-alert-before-close="before_close()" xiao-alert-after-close="after_closed()">
+                    <button type="button" class="close" miss-data="alert">×</button>
+                    <h4 class="alert-heading">Oh snap! You got an error!</h4>
+                    <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+                    <p>
+                        <a class="btn btn-danger" href="#" ng-click="ok()">Take this action</a>
+                        <a class="btn" href="#" ng-click="cancel()">Or do this</a>
+                    </p>
+                </div>
+            </div>
+            <script>
+                var demoApp = angular.module("demoApp",["xiao_alert","xiao_popover"]);
+                demoApp.controller("alertDemoController",["$scope",function($scope){
+                    $scope.close_alert = false;
+                    $scope.ok=function(){
+                        alert('ok');
+                        $scope.close_alert = true;
+                    }
+                    $scope.cancel = function(){
+                        alert('cancel');
+                        $scope.close_alert = true;
+                    }
+                    $scope.btn_close = function(){
+                        if($scope.close_alert){
+                            $scope.close_alert = false;
+                        }else{
+                            $scope.close_alert = true;
+                        }
+
+                    };
+                    $scope.before_close = function(){
+                        alert('before_close')
+                    }
+                    $scope.after_closed = function(){
+                        alert('after_closed')
+                    }
+                }])
+            </script>
+            <div>
+                <h3>说明</h3>
+                <pre>
+                     <code>
+* 引用boostrap alert 样式
+* 使用方法：
+*    &lt;div ng-controller="alertDemoController"&gt;
+*       &lt;div class="alert alert-block alert-error fade in" xiao-alert&gt;
+*          &lt;button type="button" class="close" miss-data="alert"&gt;×&lt;/button&gt;
+*          &lt;h4 class="alert-heading"&gt;Oh snap! You got an error!&lt;/h4&gt;
+*          &lt;p&gt;Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
+*        &lt;/div&gt;
+*    &lt;/div&gt;
+*
+*    如果想在控制器中控制 需要在当前作用域设置一个变量 并且把变量名传给指令 变量类型为布尔类型
+*    true 代表关闭弹窗 false 代表弹出弹窗
+*
+*    例：
+*
+*        html:
+*
+*           &lt;div class="alert alert-block alert-error fade in" xiao-alert = "isclose"&gt;
+*
+*        controller：
+*
+*           app.cuntroller("test",function($scope){
+*               $scope.isclose = false
+*           })
+*
+*    也可以设置弹出前后的函数调用。给指令所在元素增加 xiaoAlertBeforeClose 或者 xiaoAlertAfterClose，
+*    xiaoAlertBeforeClose 代表弹窗关闭前调用的函数，
+*    xiaoAlertAfterClose  代表弹窗关闭后调用的函数
+*
+*    例：
+*       html:
+*
+*          &lt;div class="alert alert-block alert-error fade in" xiao-alert = "isclose" xiao-alert-before-close="before()" xiao-alert-after-close = "after()" &gt;
+*
+*       controller:
+*
+*           app.cuntroller("test",function($scope){
+*              $scope.isclose = false；
+*              //关闭前调用
+*              $scope.before = function(){
+*                  do something......
+*              }
+*              //关闭后调用
+*              $scope.after = function(){
+*                  do something......
+*              }
+*           })
+                     </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div ng-app="popoverApp">
+        <div class="demo" ng-controller="popoverController">
+            <div class="demo-popover">
+                <h2>xiaoPopover</h2>
+                <div class="clearfix demo1">
+                    <h3>1.simple</h3>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo">demo1 left</div>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="bottom">demo1 bottom</div>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="top">demo1 top</div>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="right">demo1 right</div>
+                </div>
+                <div class="clearfix demo2">
+                    <h3>2.complex</h3>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" popover-templateurl="template/popver_template.html">demo1 left</div>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="bottom" popover-templateurl="template/popver_template.html">demo1 bottom</div>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="top" popover-templateurl="template/popver_template.html">demo1 top</div>
+                    <div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="right" popover-templateurl="template/popver_template.html">demo1 right</div>
+                </div>
+                <div>
+                    <h3>说明</h3>
+            <pre>
+                <code>
+/*
+* 引用boostrap alert 样式
+*
+* 指令实现bootstrap popover效果 而且可以直接指定模板地址 来替换默认显示的样式
+*
+* @param      data-title      标题
+* @param      data-content    主题内容
+* @param      data-placement  显示的方位
+* @param      popover-templateurl  模板地址
+*
+* 使用方法：
+*
+*   &lt;div class="btn" xiao-popover data-title="demo" data-content="i am demo"&gt;demo1 left&lt;/div&gt;
+*
+*   &lt;div class="btn" xiao-popover data-title="demo" data-content="i am demo" data-placement="top" popover-templateurl="template/popver_template.html"&gt;demo1 top&lt;/div&gt;
+*
+* */
+                </code>
+            </pre>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            demoApp.controller("popoverController",["$scope",function($scope){
+                $scope.ok = function() {
+                    alert("ok");
+                }
+                $scope.when_close = function(){
+                    alert("close")
+                }
+            }])
+        </script>
+    </div>
+
+</body>
+</html>
